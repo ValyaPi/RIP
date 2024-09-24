@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.AdManipulator.as_view()),
+    path('api/v1/execute', views.AdManipulator.as_view()),
 ] 
 
 if settings.DEBUG:
