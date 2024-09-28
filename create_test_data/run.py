@@ -10,7 +10,7 @@ def create_ad(data: dict):
         }
         data.pop('image')
     
-    response = requests.post('http://localhost:8000', data=data, files=files)
+    response = requests.post('http://localhost:8000/api/v1/execute', data=data, files=files)
     print(response.json(), "\n")
 
 
@@ -26,7 +26,7 @@ ads = [
         'price': 16000,
         'image': 'pups.png'
     },
-        {
+    {
         'title': 'Собака1',
         'description': 'Собака',
         'kind': 'Dog',
@@ -37,7 +37,7 @@ ads = [
         'price': 100,
         'image': 'cap.jpg'
     },
-        {
+    {
         'title': 'Пуп',
         'description': 'Милая собака',
         'kind': 'Dog',
@@ -47,86 +47,7 @@ ads = [
         'location': 'Новосибирск',
         'price': 16500,
         'image': 'panda.jpg'
-    },
-        {
-        'title': 'Пупсик',
-        'description': 'Милый пупсик',
-        'kind': 'Dog',
-        'breed': 'пуп',
-        'age': 1,
-        'gender': 'M',
-        'location': 'Москва',
-        'price': 16000,
-        'image': 'pups.png'
-    },
-        {
-        'title': 'Пупсик',
-        'description': 'Милый пупсик',
-        'kind': 'Dog',
-        'breed': 'пуп',
-        'age': 1,
-        'gender': 'M',
-        'location': 'Москва',
-        'price': 16000,
-        'image': 'pups.png'
-    },
-        {
-        'title': 'Пупсик',
-        'description': 'Милый пупсик',
-        'kind': 'Dog',
-        'breed': 'пуп',
-        'age': 1,
-        'gender': 'M',
-        'location': 'Москва',
-        'price': 16000,
-        'image': 'pups.png'
-    },
-        {
-        'title': 'Пупсик',
-        'description': 'Милый пупсик',
-        'kind': 'Dog',
-        'breed': 'пуп',
-        'age': 1,
-        'gender': 'M',
-        'location': 'Москва',
-        'price': 16000,
-        'image': 'pups.png'
-    },
-        {
-        'title': 'Пупсик',
-        'description': 'Милый пупсик',
-        'kind': 'Dog',
-        'breed': 'пуп',
-        'age': 1,
-        'gender': 'M',
-        'location': 'Москва',
-        'price': 16000,
-        'image': 'pups.png'
-    },
-        {
-        'title': 'Пупсик',
-        'description': 'Милый пупсик',
-        'kind': 'Dog',
-        'breed': 'пуп',
-        'age': 1,
-        'gender': 'M',
-        'location': 'Москва',
-        'price': 16000,
-        'image': 'pups.png'
-    },
-        {
-        'title': 'Пупсик',
-        'description': 'Милый пупсик',
-        'kind': 'Dog',
-        'breed': 'пуп',
-        'age': 1,
-        'gender': 'M',
-        'location': 'Москва',
-        'price': 16000,
-        'image': 'pups.png'
     }
-
-
 ]
 
 

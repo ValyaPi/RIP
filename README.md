@@ -44,7 +44,8 @@
 
     2.4 В отдельном терминале запустить скрипт создания начальных записей
     ```
-    python3 create_test_data/run.py
+    cd create_test_data
+    python3 run.py
     ```
 
 
