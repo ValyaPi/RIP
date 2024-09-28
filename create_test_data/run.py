@@ -16,7 +16,7 @@ def create_ad(data: dict):
 
 ads = [
     {
-        'title': 'Пупсик',
+        'title': 'Пупсик2',
         'description': 'Милый пупсик',
         'kind': 'Dog',
         'breed': 'пуп',
@@ -27,7 +27,7 @@ ads = [
         'image': 'pups.png'
     },
     {
-        'title': 'Собака1',
+        'title': 'Собака2',
         'description': 'Собака',
         'kind': 'Dog',
         'breed': 'красивая порода',
@@ -38,7 +38,7 @@ ads = [
         'image': 'cap.jpg'
     },
     {
-        'title': 'Пуп',
+        'title': 'Пуп2',
         'description': 'Милая собака',
         'kind': 'Dog',
         'breed': 'красивая пуп',

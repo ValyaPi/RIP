@@ -60,14 +60,14 @@ JSON запрос для GET ничего не принимает
 Пример JSON запроса для POST (все поля кроме image обязательны для заполнения, пример работы с image в папке create_test_data, в поле gender может быть только M или F, в поле kind - Dog или Cat):
 ```
 {
-    'title': 'Пупсик',
-    'description': 'Милый пупсик',
-    'kind': 'Dog',
-    'breed': 'пуп',
-    'age': 1,
-    'gender': 'M',
-    'location': 'Москва',
-    'price': 16000,
+    "title": "Пупсик",
+    "description": "Милый пупсик",
+    "kind": "Dog",
+    "breed": "пуп",
+    "age": 1,
+    "gender": "M",
+    "location": "Москва",
+    "price": 16000
 }
 ```
 
