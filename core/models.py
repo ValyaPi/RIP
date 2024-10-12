@@ -14,6 +14,7 @@ class AnimalAd(models.Model):
     KIND_CHOICES = [
         ('Dog', 'Собака'),
         ('Cat', 'Кот'),
+        ('Bird', 'Птица')
     ]
 
     title = models.CharField(max_length=255, verbose_name='Название')

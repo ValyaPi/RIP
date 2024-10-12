@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class AdManipulator(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     
     def get(self, request):
         ads = AnimalAd.objects.all().values('id','title', 'description', 'kind', 'breed', 'age', 'gender', 'location', 'price', 'image')
