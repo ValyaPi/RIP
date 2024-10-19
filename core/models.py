@@ -15,6 +15,10 @@ class Message(models.Model):
     def __str__(self):
         return f'{self.user.username}: {self.content}'
 
+class Chat(models.Model):
+    chat_name = models.CharField(max_length=50, verbose_name='Имя чата')
+    support_read = models.BooleanField(max_length=50, verbose_name='Прочитан техподдержкой', default=True)
+
 class AnimalAd(models.Model):
     GENDER_CHOICES = [
         ('M', 'Мужской'),

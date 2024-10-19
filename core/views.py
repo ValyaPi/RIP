@@ -6,8 +6,8 @@ from django.core import serializers
 from core.models import AnimalAd
 from django.http import JsonResponse
 from .serializers import AnimalAdSerializer
-from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from .models import Chat
 
 class AdManipulator(APIView):
     # permission_classes = [IsAuthenticated]
@@ -67,3 +67,25 @@ class SupportChat(APIView):
         user = request.user
 
         return JsonResponse({'room_name': user.id})
+
+
+class ChatsListView(APIView):
+    permission_classes = [IsAdminUser]  # Доступ только для staff
+
+    def get(self, request):
+        # Получаем все чаты
+        chats = Chat.objects.all()
+
+        # Сортируем чаты: сначала непрочитанные, затем прочитанные
+        sorted_chats = sorted(chats, key=lambda x: x.support_read)
+
+        # Формируем ответ в виде списка словарей
+        chats_list = [
+            {
+                'chat_name': chat.chat_name,
+                'support_read': chat.support_read
+            }
+            for chat in sorted_chats
+        ]
+
+        return JsonResponse({"chats": chats_list})
