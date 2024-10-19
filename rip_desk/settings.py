@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'daphne',
     'django.contrib.staticfiles',
+    'channels',
     'core.apps.CoreConfig',
     'rest_framework',
     'corsheaders'
@@ -84,6 +86,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'rip_desk.wsgi.application'
+# Добавляем ASGI-приложение
+ASGI_APPLICATION = 'rip_desk.asgi.application'
+
 
 
 # Database
@@ -157,4 +162,13 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],  # Настройка Redis хоста
+        },
+    },
 }

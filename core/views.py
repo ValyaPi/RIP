@@ -9,7 +9,6 @@ from .serializers import AnimalAdSerializer
 from rest_framework.permissions import IsAuthenticated
 
 
-
 class AdManipulator(APIView):
     # permission_classes = [IsAuthenticated]
     
