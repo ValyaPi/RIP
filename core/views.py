@@ -59,3 +59,11 @@ class AdManipulator(APIView):
 
         return JsonResponse({"message":"Ad deleted)"}, status=status.HTTP_200_OK)
 
+class SupportChat(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # Получаем текущего пользователя
+        user = request.user
+
+        return JsonResponse({'room_name': user.id})

@@ -2,8 +2,18 @@ from django.db import models
 import os
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
+class Message(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    room_id = models.IntegerField()
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user.username}: {self.content}'
 
 class AnimalAd(models.Model):
     GENDER_CHOICES = [
