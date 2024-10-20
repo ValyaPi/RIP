@@ -20,16 +20,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.chat = await self.get_or_create_chat(self.room_name)
 
         # Если у пользователя статус Staff, он может подключаться ко всем чатам
-        if user.is_staff:
-            # Присоединяем к группе чата
-            self.room_group_name = f'chat_{self.room_name}'
-        else:
-            # Проверка, что пользователь подключается к своей комнате
-            if self.room_name != str(user.id):
-                await self.close()
-                return
+        if not user.is_staff and self.room_name != str(user.id):     
+            await self.close()
+            return
             
-            self.room_group_name = f'chat_{self.room_name}'
+        self.room_group_name = f'chat_{self.room_name}'
 
         # Присоединяем пользователя к группе
         await self.channel_layer.group_add(
@@ -43,7 +38,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         messages = await self.get_messages()
         for message in messages:
             await self.send(text_data=json.dumps({
-                'message': message.content
+                'sender': message.get("user__username"),
+                'message': message.get("content")
             }))
         
         if user.is_staff:
@@ -67,13 +63,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             {
                 'type': 'chat_message',
+                'sender': self.scope['user'].username,
                 'message': message,
             }
         )
 
     async def chat_message(self, event):
         message = event['message']
+        sender = event['sender']
         await self.send(text_data=json.dumps({
+            'sender': sender,
             'message': message
         }))
         # Если пользователь со статусом Staff, обновляем статус прочтения
@@ -93,12 +92,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def get_messages(self):
-        return list(Message.objects.filter(room_id=self.room_name).order_by('-timestamp').all())
+        return list(Message.objects.filter(room_id=self.room_name).order_by('-timestamp').values('content', 'user__username'))
     
     @database_sync_to_async
     def get_or_create_chat(self, room_id):
         chat, created = Chat.objects.get_or_create(
-            chat_name=room_id,
-            defaults={'support_read': False}  # Устанавливаем значение по умолчанию
+            chat_name=room_id
         )
         return chat
