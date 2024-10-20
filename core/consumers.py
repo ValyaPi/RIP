@@ -42,14 +42,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # Отправляем историю сообщений
         messages = await self.get_messages()
         for message in messages:
-            print("Отправка")
             await self.send(text_data=json.dumps({
-                'type': 'chat_message',
                 'message': message.content
             }))
         
         if user.is_staff:
-            print("Техподдержка прочитала")
             await self.update_support_read_status(True)
         
         
@@ -64,7 +61,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # Сразу после получения считаем чат не прочтенным поддержкой
         await self.update_support_read_status(False)
-        print("Техподдержка еще не прочитала")
 
         # Отправляем сообщение всем участникам группы
         await self.channel_layer.group_send(
@@ -80,10 +76,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({
             'message': message
         }))
-        print("Да ведь?")
         # Если пользователь со статусом Staff, обновляем статус прочтения
         if self.scope['user'].is_staff:
-            print("Техподдержка прочитала")
             await self.update_support_read_status(True)
 
     @database_sync_to_async

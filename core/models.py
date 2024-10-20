@@ -13,11 +13,14 @@ class Message(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.user.username}: {self.content}'
+        return f'{self.room_id} | {self.user.username}: {self.content}'
 
 class Chat(models.Model):
     chat_name = models.CharField(max_length=50, verbose_name='Имя чата')
     support_read = models.BooleanField(max_length=50, verbose_name='Прочитан техподдержкой', default=True)
+
+    def __str__(self):
+        return f'ID:{self.chat_name} ({"прочитан" if self.support_read else "не прочитан"})'
 
 class AnimalAd(models.Model):
     GENDER_CHOICES = [

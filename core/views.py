@@ -80,12 +80,13 @@ class ChatsListView(APIView):
         sorted_chats = sorted(chats, key=lambda x: x.support_read)
 
         # Формируем ответ в виде списка словарей
-        chats_list = [
-            {
+        chats_list = []
+            
+        for chat in sorted_chats:
+            chats_list.append({
                 'chat_name': chat.chat_name,
                 'support_read': chat.support_read
-            }
-            for chat in sorted_chats
-        ]
+            })
+        
 
         return JsonResponse({"chats": chats_list})

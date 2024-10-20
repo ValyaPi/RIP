@@ -19,6 +19,7 @@ from django.urls import path
 from core import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django_channels_jwt.views import AsgiValidateTokenView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -26,11 +27,18 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # Эндпоинт для CRUD
     path('api/v1/execute', views.AdManipulator.as_view()),
+
+    # Эндпоинты для техподдержки
     path('api/v1/support_chat', views.SupportChat.as_view()),
     path('api/v1/chats_list', views.ChatsListView.as_view()),
+
+    # эндпоинты для JWT
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
+    path('api/ws_token/', AsgiValidateTokenView.as_view())
 ]
 
 
