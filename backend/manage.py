@@ -5,6 +5,7 @@ import sys
 from django.db import connections
 from django.db.utils import OperationalError
 import time
+from utils import create_superuser
 
 def main():
     """Run administrative tasks."""
@@ -32,6 +33,7 @@ def main():
         
         execute_from_command_line(["manage.py", "makemigrations"])
         execute_from_command_line(["manage.py", "migrate"])
+        create_superuser()
         
 
     execute_from_command_line(sys.argv)
