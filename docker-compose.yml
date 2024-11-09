@@ -36,6 +36,13 @@ services:
       DJANGO_SUPERUSER_PASSWORD: admin
     depends_on:
       - redis
+    
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
 
   nginx:
     image: nginx:latest
